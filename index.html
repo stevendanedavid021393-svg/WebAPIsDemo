@@ -46,6 +46,38 @@
       <p class="hint">Saved locally in this browser via <code>localStorage</code>.</p>
       <div id="saved-location" class="saved">No location saved yet.</div>
     </section>
+
+    <!-- Card 3: explains the two Web APIs this demo uses and how. -->
+    <section class="card">
+      <h2>APIs Used</h2>
+
+      <h3>API #1: Geolocation API</h3>
+      <p>
+        The <a href="https://www.w3schools.com/js/js_api_geolocation.asp" target="_blank" rel="noopener">Geolocation API</a>
+        lets a web page ask the browser for the user's current physical
+        location. Calling <code>navigator.geolocation.getCurrentPosition()</code>
+        prompts the user for permission, then returns latitude, longitude,
+        and accuracy. In this demo, clicking <strong>Get My Location</strong>
+        triggers this call, and the result is displayed above. If the user
+        denies permission, the device can't get a fix, or the request takes
+        too long, the API reports an error instead &mdash; which this demo
+        catches and turns into a friendly message.
+      </p>
+
+      <h3>API #2: Web Storage API</h3>
+      <p>
+        The <a href="https://www.w3schools.com/js/js_api_web_storage.asp" target="_blank" rel="noopener">Web Storage API</a>
+        lets a page save simple key/value data directly in the browser using
+        <code>localStorage</code>, with no server or database involved. Data
+        saved this way persists across page reloads and browser restarts
+        until it's explicitly cleared. In this demo, every location
+        successfully retrieved is saved to <code>localStorage</code> so it
+        can be shown again the next time the page loads, and the
+        <strong>Clear Saved Location</strong> button removes it.
+      </p>
+    </section>
+
+    <footer class="submitted-by">Submitted by Steven David</footer>
   </main>
 
   <script src="script.js"></script>

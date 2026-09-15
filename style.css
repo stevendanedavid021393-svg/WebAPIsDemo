@@ -116,3 +116,32 @@ button:disabled {
   font-size: 14px;
   white-space: pre-line; /* respect the \n used when building this text in JS */
 }
+
+/* --- "APIs Used" explanation card ------------------------------------ */
+
+.card h3 {
+  margin-bottom: 4px;
+}
+
+.card h3:not(:first-of-type) {
+  margin-top: 20px;
+}
+
+.card p {
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.card a {
+  color: #2563eb;
+}
+
+/* --- Footer credit ---------------------------------------------------- */
+
+.submitted-by {
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+  margin-top: 8px;
+  padding-bottom: 8px;
+}
