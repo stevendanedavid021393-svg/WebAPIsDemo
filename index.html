@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geolocation + Web Storage Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>Where Am I?</h1>
+    <p class="subtitle">
+      A tiny demo combining the <strong>Geolocation API</strong> and the
+      <strong>Web Storage API</strong>.
+    </p>
+
+    <section class="card">
+      <button id="locate-btn" type="button">Get My Location</button>
+      <button id="clear-btn" type="button" class="secondary">Clear Saved Location</button>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+
+      <dl id="result" class="result" hidden>
+        <dt>Latitude</dt>
+        <dd id="lat">-</dd>
+        <dt>Longitude</dt>
+        <dd id="lng">-</dd>
+        <dt>Accuracy</dt>
+        <dd id="accuracy">-</dd>
+        <dt>Retrieved at</dt>
+        <dd id="timestamp">-</dd>
+      </dl>
+    </section>
+
+    <section class="card">
+      <h2>Last Saved Location</h2>
+      <p class="hint">Saved locally in this browser via <code>localStorage</code>.</p>
+      <div id="saved-location" class="saved">No location saved yet.</div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
