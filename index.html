@@ -14,12 +14,19 @@
       <strong>Web Storage API</strong>.
     </p>
 
+    <!-- Card 1: triggers the Geolocation API and shows the raw result. -->
     <section class="card">
+      <!-- Clicking this calls navigator.geolocation.getCurrentPosition() (script.js). -->
       <button id="locate-btn" type="button">Get My Location</button>
+      <!-- Clicking this removes the saved entry from localStorage. -->
       <button id="clear-btn" type="button" class="secondary">Clear Saved Location</button>
 
+      <!-- Live status/error messages are written here by script.js.
+           aria-live="polite" lets screen readers announce updates automatically. -->
       <div id="status" class="status" role="status" aria-live="polite"></div>
 
+      <!-- Hidden until a location is successfully retrieved; script.js unhides it
+           and fills in the values below. -->
       <dl id="result" class="result" hidden>
         <dt>Latitude</dt>
         <dd id="lat">-</dd>
@@ -32,6 +39,8 @@
       </dl>
     </section>
 
+    <!-- Card 2: shows whatever location is currently persisted via the
+         Web Storage API (localStorage), so it survives page reloads. -->
     <section class="card">
       <h2>Last Saved Location</h2>
       <p class="hint">Saved locally in this browser via <code>localStorage</code>.</p>

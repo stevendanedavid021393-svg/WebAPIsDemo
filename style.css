@@ -1,7 +1,9 @@
+/* Global reset: include border/padding in every element's declared width/height. */
 * {
   box-sizing: border-box;
 }
 
+/* Page background and base typography. */
 body {
   font-family: system-ui, sans-serif;
   margin: 0;
@@ -10,6 +12,7 @@ body {
   color: #1c1e21;
 }
 
+/* Center the content column and cap its width for readability. */
 main {
   max-width: 480px;
   margin: 0 auto;
@@ -24,6 +27,7 @@ h1 {
   margin-top: 0;
 }
 
+/* White "panel" wrapper used for each section of the page. */
 .card {
   background: #fff;
   border: 1px solid #e0e0e0;
@@ -31,6 +35,8 @@ h1 {
   padding: 16px 20px;
   margin-bottom: 16px;
 }
+
+/* --- Buttons -------------------------------------------------------- */
 
 button {
   font-size: 15px;
@@ -48,6 +54,8 @@ button:hover {
   background: #1d4ed8;
 }
 
+/* Used on the "Clear Saved Location" button to visually de-emphasize it
+   next to the primary "Get My Location" action. */
 button.secondary {
   background: #6b7280;
 }
@@ -56,25 +64,31 @@ button.secondary:hover {
   background: #4b5563;
 }
 
+/* Applied while a geolocation request is in flight (see script.js). */
 button:disabled {
   background: #9ca3af;
   cursor: not-allowed;
 }
 
+/* --- Status / result messaging --------------------------------------- */
+
 .status {
   margin-top: 8px;
   font-size: 14px;
-  min-height: 20px;
+  min-height: 20px; /* reserve space so layout doesn't jump when text appears */
 }
 
+/* Applied by script.js when a Geolocation or Web Storage error occurs. */
 .status.error {
   color: #b91c1c;
 }
 
+/* Applied by script.js after a successful operation. */
 .status.success {
   color: #15803d;
 }
 
+/* Layout for the latitude/longitude/accuracy/timestamp definition list. */
 .result {
   margin-top: 12px;
   display: grid;
@@ -97,7 +111,8 @@ button:disabled {
   margin-top: -4px;
 }
 
+/* Displays the location loaded back out of localStorage. */
 .saved {
   font-size: 14px;
-  white-space: pre-line;
+  white-space: pre-line; /* respect the \n used when building this text in JS */
 }
