@@ -132,6 +132,16 @@ button:disabled {
   line-height: 1.5;
 }
 
+.card ul {
+  margin: 4px 0;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.card li {
+  margin-bottom: 6px;
+}
+
 .card a {
   color: #2563eb;
 }

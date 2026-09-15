@@ -77,6 +77,54 @@
       </p>
     </section>
 
+    <!-- Card 4: details exactly where error handling is applied in script.js. -->
+    <section class="card">
+      <h2>Error Handling (Details)</h2>
+
+      <h3>Geolocation API &mdash; used in <code>handleLocateClick()</code></h3>
+      <ul>
+        <li>
+          <strong>Support check:</strong> before calling the API,
+          <code>if (!('geolocation' in navigator))</code> catches browsers/
+          contexts where <code>navigator.geolocation</code> doesn't exist at all.
+        </li>
+        <li>
+          <strong>Error callback:</strong> <code>getCurrentPosition()</code>'s
+          second argument handles every <code>GeolocationPositionError</code>:
+          <code>PERMISSION_DENIED</code> (user said no),
+          <code>POSITION_UNAVAILABLE</code> (no fix could be determined), and
+          <code>TIMEOUT</code> (took longer than the 10s limit) each get their
+          own message; anything else falls through to a generic message.
+        </li>
+      </ul>
+
+      <h3>Web Storage API &mdash; used in <code>saveLocation()</code>, <code>loadSavedLocation()</code>, <code>clearSavedLocation()</code></h3>
+      <ul>
+        <li>
+          <strong><code>saveLocation()</code>:</strong> the
+          <code>localStorage.setItem()</code> call is wrapped in
+          <code>try/catch</code> to catch a full or disabled storage quota.
+        </li>
+        <li>
+          <strong><code>loadSavedLocation()</code>:</strong> both
+          <code>localStorage.getItem()</code> and the following
+          <code>JSON.parse()</code> are wrapped in <code>try/catch</code>, so
+          unavailable storage or corrupted saved data don't crash the page.
+        </li>
+        <li>
+          <strong><code>clearSavedLocation()</code>:</strong>
+          <code>localStorage.removeItem()</code> is likewise wrapped in
+          <code>try/catch</code>.
+        </li>
+      </ul>
+      <p>
+        In every case above, the <code>catch</code> block logs the real error
+        with <code>console.error()</code> for debugging, and calls
+        <code>setStatus()</code> with a plain-language message so the user
+        always sees what went wrong instead of a silent failure.
+      </p>
+    </section>
+
     <footer class="submitted-by">Submitted by Steven David</footer>
   </main>
 
