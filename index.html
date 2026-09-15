@@ -10,8 +10,8 @@
   <main>
     <h1>Where Am I?</h1>
     <p class="subtitle">
-      A tiny demo combining the <strong>Geolocation API</strong> and the
-      <strong>Web Storage API</strong>.
+      A small demo built with the <strong>Geolocation API</strong> and the
+      <strong>Web Storage API</strong>, with error handling on both.
     </p>
 
     <!-- Card 1: triggers the Geolocation API and shows the raw result. -->
@@ -54,26 +54,26 @@
       <h3>API #1: Geolocation API</h3>
       <p>
         The <a href="https://www.w3schools.com/js/js_api_geolocation.asp" target="_blank" rel="noopener">Geolocation API</a>
-        lets a web page ask the browser for the user's current physical
-        location. Calling <code>navigator.geolocation.getCurrentPosition()</code>
-        prompts the user for permission, then returns latitude, longitude,
-        and accuracy. In this demo, clicking <strong>Get My Location</strong>
-        triggers this call, and the result is displayed above. If the user
-        denies permission, the device can't get a fix, or the request takes
-        too long, the API reports an error instead &mdash; which this demo
-        catches and turns into a friendly message.
+        asks the browser for the user's current physical location. The call
+        is <code>navigator.geolocation.getCurrentPosition()</code>: it
+        prompts for permission, then returns latitude, longitude, and
+        accuracy. The <strong>Get My Location</strong> button triggers this
+        call, and the result is displayed above. If permission is denied,
+        the device can't get a fix, or the request times out, the API
+        returns an error instead of a position &mdash; this is handled
+        below.
       </p>
 
       <h3>API #2: Web Storage API</h3>
       <p>
         The <a href="https://www.w3schools.com/js/js_api_web_storage.asp" target="_blank" rel="noopener">Web Storage API</a>
-        lets a page save simple key/value data directly in the browser using
-        <code>localStorage</code>, with no server or database involved. Data
+        saves key/value data directly in the browser via
+        <code>localStorage</code>, with no server or database required. Data
         saved this way persists across page reloads and browser restarts
-        until it's explicitly cleared. In this demo, every location
-        successfully retrieved is saved to <code>localStorage</code> so it
-        can be shown again the next time the page loads, and the
-        <strong>Clear Saved Location</strong> button removes it.
+        until it's cleared. Every location retrieved successfully is saved
+        to <code>localStorage</code> so it's still there the next time the
+        page loads; the <strong>Clear Saved Location</strong> button removes
+        it.
       </p>
     </section>
 
@@ -81,47 +81,48 @@
     <section class="card">
       <h2>Error Handling (Details)</h2>
 
-      <h3>Geolocation API &mdash; used in <code>handleLocateClick()</code></h3>
+      <h3>Geolocation API &mdash; in <code>handleLocateClick()</code></h3>
       <ul>
         <li>
-          <strong>Support check:</strong> before calling the API,
-          <code>if (!('geolocation' in navigator))</code> catches browsers/
-          contexts where <code>navigator.geolocation</code> doesn't exist at all.
+          <strong>Support check:</strong>
+          <code>if (!('geolocation' in navigator))</code> runs before the API
+          call, to catch browsers or contexts where
+          <code>navigator.geolocation</code> doesn't exist.
         </li>
         <li>
-          <strong>Error callback:</strong> <code>getCurrentPosition()</code>'s
-          second argument handles every <code>GeolocationPositionError</code>:
-          <code>PERMISSION_DENIED</code> (user said no),
-          <code>POSITION_UNAVAILABLE</code> (no fix could be determined), and
-          <code>TIMEOUT</code> (took longer than the 10s limit) each get their
-          own message; anything else falls through to a generic message.
+          <strong>Error callback:</strong> the second argument to
+          <code>getCurrentPosition()</code> handles every
+          <code>GeolocationPositionError</code> code &mdash;
+          <code>PERMISSION_DENIED</code>, <code>POSITION_UNAVAILABLE</code>,
+          and <code>TIMEOUT</code> &mdash; each with its own message; any
+          other code falls back to a generic one.
         </li>
       </ul>
 
-      <h3>Web Storage API &mdash; used in <code>saveLocation()</code>, <code>loadSavedLocation()</code>, <code>clearSavedLocation()</code></h3>
+      <h3>Web Storage API &mdash; in <code>saveLocation()</code>, <code>loadSavedLocation()</code>, <code>clearSavedLocation()</code></h3>
       <ul>
         <li>
-          <strong><code>saveLocation()</code>:</strong> the
-          <code>localStorage.setItem()</code> call is wrapped in
+          <strong><code>saveLocation()</code>:</strong>
+          <code>localStorage.setItem()</code> is wrapped in
           <code>try/catch</code> to catch a full or disabled storage quota.
         </li>
         <li>
           <strong><code>loadSavedLocation()</code>:</strong> both
-          <code>localStorage.getItem()</code> and the following
-          <code>JSON.parse()</code> are wrapped in <code>try/catch</code>, so
-          unavailable storage or corrupted saved data don't crash the page.
+          <code>localStorage.getItem()</code> and the <code>JSON.parse()</code>
+          that follows it are wrapped in <code>try/catch</code>, so
+          unavailable storage or corrupted saved data won't crash the page.
         </li>
         <li>
           <strong><code>clearSavedLocation()</code>:</strong>
-          <code>localStorage.removeItem()</code> is likewise wrapped in
-          <code>try/catch</code>.
+          <code>localStorage.removeItem()</code> is wrapped in
+          <code>try/catch</code> as well.
         </li>
       </ul>
       <p>
-        In every case above, the <code>catch</code> block logs the real error
-        with <code>console.error()</code> for debugging, and calls
-        <code>setStatus()</code> with a plain-language message so the user
-        always sees what went wrong instead of a silent failure.
+        Every <code>catch</code> block logs the real error with
+        <code>console.error()</code> and calls <code>setStatus()</code> with
+        a plain-language message, so the user always sees what went wrong
+        instead of a silent failure.
       </p>
     </section>
 
